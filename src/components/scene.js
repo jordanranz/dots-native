@@ -5,6 +5,9 @@ import React from "react-native";
 import App from "../containers/app";
 import NavigationBar from "./navigation-bar";
 
+import ParallaxList from "./parallax-list";
+import DotsMapbox from "./dots-mapbox";
+
 let {
   Navigator,
   View
@@ -16,11 +19,11 @@ class Scene extends React.Component {
     return (
       <View style={{flex: 1}}>
         <NavigationBar
-          backgroundStyle={{backgroundColor: "#eee"}}
+          backgroundStyle={{backgroundColor: "#564ccd", }}
           navigator={navigator}
           route={route}
           title={route.title}
-          titleColor="#333"
+          titleColor="#fff"
         />
         <Component
           navigator={navigator}
@@ -36,8 +39,8 @@ class Scene extends React.Component {
         style={{flex: 1}}
         renderScene={this.renderScene}
         initialRoute={{
-          component: App,
-          title: "Starter App"
+          component: DotsMapbox,
+          title: "Dots"
         }}
       />
     );

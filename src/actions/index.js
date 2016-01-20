@@ -21,7 +21,7 @@ export const fetchData = (): Function => {
   return (dispatch) => {
     dispatch(requestData());
     return setTimeout(() => {
-      const data = {message: "Hello"};
+      const data = {meow:"Mix"};
       dispatch(receiveData(data));
     }, 300);
   };

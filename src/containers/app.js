@@ -23,7 +23,7 @@ class App extends React.Component {
           alignItems: "center"
         }}
       >
-        <Text>{this.props.isFetching ? "Loading" : this.props.message}</Text>
+        <Text>{this.props.isFetching ? "Loading" : this.props.meow}</Text>
       </ScrollView>
     );
   }
@@ -32,16 +32,19 @@ class App extends React.Component {
 App.propTypes = {
   dispatch: React.PropTypes.func,
   message: React.PropTypes.string,
-  isFetching: React.PropTypes.bool
+  isFetching: React.PropTypes.bool,
+  meow: React.PropTypes.string
 };
 
 App.defaultProps = {
   dispatch: () => {},
   isFetching: false,
-  message: ""
+  message: "",
+  meow: "lol"
 };
 
 export default connect((state) => ({
   isFetching: state.data.isFetching,
-  message: state.data.message
+  message: state.data.message,
+  meow: state.data.meow
 }))(App);

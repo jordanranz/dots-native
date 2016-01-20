@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     right: 0
   },
   navBarText: {
-    fontSize: 16,
+    fontSize: 20,
     marginVertical: 10,
     flex: 2,
     textAlign: "center"

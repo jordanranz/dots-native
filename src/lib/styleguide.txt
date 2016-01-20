@@ -1,0 +1,14 @@
+//#B794E3 : purple
+//#bbebbe : dark purple
+//#7FC8FA : light blue
+//#7FFAAA : green
+
+//dark purple: #564ccd
+//dot purple: #867FDB
+// purple outline: #979DFF alpha: 70%
+
+//dot blue: #509FEB
+// blue outline: #97D5FF alpha: 70%
+
+//dot green: #48DF6E
+// green outline: #80FF6E alpha: 70%
