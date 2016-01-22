@@ -21,7 +21,7 @@ var {
 } = React;
 
 var DotsMapbox = React.createClass({
-    mixins: [Mapbox.Mixin],
+    //mixins: [Mapbox.Mixin],
 
     getInitialState() {
         return {
@@ -87,6 +87,7 @@ var DotsMapbox = React.createClass({
 
     render() {
         var annotations = this.getAnnotations(this.props.events);
+        /*
         return (
             <View style={styles.container}>
                 <Mapbox
@@ -123,6 +124,7 @@ var DotsMapbox = React.createClass({
                 </View>
             </View>
         );
+        */
     },
 
 });

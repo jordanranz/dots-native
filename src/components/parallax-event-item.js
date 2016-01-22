@@ -24,7 +24,11 @@ export default class ParallaxEventItem extends React.Component {
   };
 
   render() {
-    var event_time = new Date(this.props.event.start_time);
+    var event_time = null;
+    if (this.props.event.start_time) {
+      event_time = new Date(this.props.event.start_time);
+    }
+    
     return (
       <TouchableHighlight>
         <Parallax.Image
@@ -71,8 +75,8 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    borderBottomWidth: 1,
-    borderBottomColor: '#564CCD',
+    borderTopWidth: 2,
+    borderTopColor: '#564CCD',
     padding: 15,
     backgroundColor: 'rgba(0,0,0,0.6)'
   },

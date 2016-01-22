@@ -5,7 +5,7 @@
 
 //dark purple: #564ccd
 //dot purple: #867FDB // rgba(86, 76, 205, 1)
-// purple outline: #979DFF alpha: 70%
+// purple outline: #979DFF alpha: 70% // rgba(151, 157, 255, 0.7)
 
 //dot blue: #509FEB
 // blue outline: #97D5FF alpha: 70%

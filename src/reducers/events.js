@@ -7,7 +7,7 @@ import {
 } from '../lib/constants';
 
 export default function events(state = {
-  isFetching: false,
+  isFetching: true,
   events: []
 }, action) {
   switch(action.type) {
