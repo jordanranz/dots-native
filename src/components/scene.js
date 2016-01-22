@@ -6,7 +6,6 @@ import App from "../containers/app";
 import NavigationBar from "./navigation-bar";
 
 import ParallaxList from "./parallax-list";
-import DotsMapbox from "./dots-mapbox";
 
 let {
   Navigator,
@@ -39,7 +38,7 @@ class Scene extends React.Component {
         style={{flex: 1}}
         renderScene={this.renderScene}
         initialRoute={{
-          component: DotsMapbox,
+          component: ParallaxList,
           title: "Dots"
         }}
       />

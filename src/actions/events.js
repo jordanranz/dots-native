@@ -29,6 +29,20 @@ export function getEventsFailure(json) {
   };
 }
 
+export function getTodayEvents() {
+  return dispatch => {
+    dispatch(getEventsRequest());
+      //store or get a sessionToken
+      return new DotsExpress().getTodayEvents()
+        .then((json) => {
+          dispatch(getEventsSuccess(json));
+        })
+        .catch((error) => {
+          dispatch(getEventsFailure(error));
+        });
+    }
+}
+
 export function getUpcomingEvents() {
   return dispatch => {
     dispatch(getEventsRequest());

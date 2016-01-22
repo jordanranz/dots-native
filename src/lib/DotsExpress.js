@@ -10,6 +10,22 @@ export default class DotsExpress {
     this.API_BASE_URL = CONFIG.EXPRESS.localUrl
   }
 
+  async getTodayEvents() {
+    return await this._fetch({
+      method: 'GET',
+      url: '/dots-api/events/today'
+    })
+    .then((response) => {
+      var  res = JSON.parse(response._bodyInit);
+      if ((response.status === 200 || response.status === 201)) {
+        return res;
+      }
+    })
+    .catch((error) => {
+      throw(error);
+    });
+  }
+
   async getUpcomingEvents() {
     return await this._fetch({
       method: 'GET',

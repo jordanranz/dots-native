@@ -1,9 +1,13 @@
 'use strict';
 
 import React from 'react-native';
+import {connect} from 'react-redux/native';
 import Mapbox from 'react-native-mapbox-gl';
 
+import {getTodayEvents} from '../actions/events';
 import mockDayEvents from '../lib/testDataDay';
+
+const Icon = require('react-native-vector-icons/FontAwesome');
 
 const mapRef = 'mapRef';
 var {
@@ -13,6 +17,7 @@ var {
     StatusBarIOS,
     View,
     TabBarIOS,
+    TouchableOpacity
 } = React;
 
 var DotsMapbox = React.createClass({
@@ -30,8 +35,8 @@ var DotsMapbox = React.createClass({
     },
 
     componentWillMount() {
-      console.log(mockDayEvents);
-      this.setState({annotations: this.getAnnotations(mockDayEvents)});
+      //this.setState({annotations: this.getAnnotations(mockDayEvents)});
+      this.props.dispatch(getTodayEvents())
     },
 
     /* Mapbox methods */
@@ -49,19 +54,12 @@ var DotsMapbox = React.createClass({
     },
 
     onOpenAnnotation(annotation) {
-        var titleText = annotation.id
-        var color = null;
-        switch(titleText){
-            case "Foundation Nightclub":
-                color = "#867FDB";
-                break;
-            case "Q Nightclub":
-                color = "#509FEB";
-                break;
-            case "Kremwerk":
-                color = "#48DF6E";
-                break;
-        }
+        this.setState({
+          center: {
+            latitude: annotation.latitude, 
+            longitude: annotation.longitude
+          }
+        });
     },
 
     onRightAnnotationTapped(e) {
@@ -88,6 +86,7 @@ var DotsMapbox = React.createClass({
     },
 
     render() {
+        var annotations = this.getAnnotations(this.props.events);
         return (
             <View style={styles.container}>
                 <Mapbox
@@ -104,13 +103,24 @@ var DotsMapbox = React.createClass({
                     zoomLevel={this.state.zoom}
                     onRegionChange={this.onRegionChange}
                     onRegionWillChange={this.onRegionWillChange}
-                    annotations={this.state.annotations}
+                    annotations={annotations}
                     onOpenAnnotation={this.onOpenAnnotation}
                     onRightAnnotationTapped={this.onRightAnnotationTapped}
                     onUpdateUserLocation={this.onUpdateUserLocation}
                     showsUserLocation={true}
                     annotationCanShowCallout={false}>
                 </Mapbox>
+                <View style={styles.buttonContainer}>
+                  <TouchableOpacity activeOpacity={0.8} style={[styles.button, styles.secondaryButton]}>
+                    <Icon name="rocket" size={20} color="white"/>
+                  </TouchableOpacity>
+                  <TouchableOpacity activeOpacity={0.8} style={[styles.button, styles.mainButton]}>
+                    <Icon name="list" size={40} color="white"/>
+                  </TouchableOpacity>
+                  <TouchableOpacity activeOpacity={0.8} style={[styles.button, styles.secondaryButton]}>
+                    <Icon name="rocket" size={20} color="white"/>
+                  </TouchableOpacity>
+                </View>
             </View>
         );
     },
@@ -119,11 +129,54 @@ var DotsMapbox = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
+      flex: 1,
+      justifyContent: 'flex-end',
     },
     map: {
-        flex: 1,    
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
+    buttonContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 20,
+      flexDirection: 'row'
+    },
+    button: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(0,0,0,0.3)',
+      borderColor: 'rgba(86, 76, 205, 0.7)',
+      borderWidth: 5,
+      margin: 10
+    },
+    mainButton: {
+      width: 90,
+      height: 90,
+      borderRadius: 45,
+    },
+    secondaryButton: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+    },
+    buttonText: {
+      color: 'white',
+      fontFamily: 'Open Sans',
+      fontSize: 18,
+    }
 });
 
-export default DotsMapbox;
+function mapStateToProps(state) {
+  const { isFetching, events } = state.events;
+
+  return {
+    isFetching,
+    events
+  }
+}
+
+export default connect(mapStateToProps)(DotsMapbox);

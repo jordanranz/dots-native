@@ -1,6 +1,9 @@
 package com.app;
 
 import android.app.Activity;
+import com.mapbox.AirMaps.AirPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.mapbox.reactnativemapboxgl.ReactNativeMapboxGLPackage;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
@@ -26,6 +29,9 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
+                .addPackage(new AirPackage())
+                .addPackage(new VectorIconsPackage())
+                .addPackage(new ReactNativeMapboxGLPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();

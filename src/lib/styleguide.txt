@@ -4,7 +4,7 @@
 //#7FFAAA : green
 
 //dark purple: #564ccd
-//dot purple: #867FDB
+//dot purple: #867FDB // rgba(86, 76, 205, 1)
 // purple outline: #979DFF alpha: 70%
 
 //dot blue: #509FEB

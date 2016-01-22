@@ -1,50 +1,24 @@
-/* @flow */
-/*eslint-disable prefer-const */
+import React from 'react-native';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ParallaxList from "../components/parallax-list";
+import DotsMapbox from "../components/dots-mapbox";
 
-import React from "react-native";
-import { connect } from "react-redux/native";
-import { fetchData } from "../actions";
+export default class App extends React.Component {
+  static propTypes = {
+    name: React.PropTypes.string,
+  };
 
-let {
-  Text,
-  ScrollView
-} = React;
-
-class App extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(fetchData());
+  constructor(props) {
+    super(props);
   }
+
   render() {
     return (
-      <ScrollView
-        style={{flex: 1}}
-        contentContainerStyle={{
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text>{this.props.isFetching ? "Loading" : this.props.meow}</Text>
-      </ScrollView>
+      <ScrollableTabView>
+        <DotsMapbox tabLabel="Map" />
+        <ParallaxList tabLabel="List" />
+      </ScrollableTabView>
     );
   }
 }
 
-App.propTypes = {
-  dispatch: React.PropTypes.func,
-  message: React.PropTypes.string,
-  isFetching: React.PropTypes.bool,
-  meow: React.PropTypes.string
-};
-
-App.defaultProps = {
-  dispatch: () => {},
-  isFetching: false,
-  message: "",
-  meow: "lol"
-};
-
-export default connect((state) => ({
-  isFetching: state.data.isFetching,
-  message: state.data.message,
-  meow: state.data.meow
-}))(App);
