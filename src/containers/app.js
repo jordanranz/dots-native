@@ -1,21 +1,22 @@
-import React from 'react-native';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import React, {AppRegistry, Navigator, StyleSheet, Text, View} from 'react-native'
+import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
+
+import DotsMap from "../components/dots-map";
 import ParallaxList from "../components/parallax-list";
 
 export default class App extends React.Component {
-  static propTypes = {
-    name: React.PropTypes.string,
-  };
-
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <ScrollableTabView>
-        <ParallaxList tabLabel="List" />
-      </ScrollableTabView>
+      <Router name="root" hideNavBar={true}>
+        <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
+
+        <Route name="map" component={DotsMap} initial={true} title="Map" type="replace"/>
+        <Route name="list" component={ParallaxList} title="List" hideNavBar={true} type="replace"/>
+      </Router>
     );
   }
 }

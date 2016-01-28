@@ -14,13 +14,15 @@ var {
 } = React;
 
 var IMAGE_WIDTH = Dimensions.get('window').width;
-var IMAGE_HEIGHT = Dimensions.get('window').height / 5.7;
+var IMAGE_HEIGHT = Dimensions.get('window').height / 5.5;
 var PIXEL_RATIO = PixelRatio.get();
 var PARALLAX_FACTOR = 0.3;
 
 export default class ParallaxEventItem extends React.Component {
   static propTypes = {
-    event: React.PropTypes.object
+    event: React.PropTypes.object,
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
   };
 
   render() {
@@ -32,7 +34,7 @@ export default class ParallaxEventItem extends React.Component {
     return (
       <TouchableHighlight>
         <Parallax.Image
-          style={styles.image}
+          style={[styles.image, {width: this.props.width}]}
           overlayStyle={styles.overlay}
           source={{ uri: this.props.event.image_uri }}
           parallaxFactor={PARALLAX_FACTOR}
@@ -69,14 +71,11 @@ export default class ParallaxEventItem extends React.Component {
 var styles = StyleSheet.create({
   image: {
     height: IMAGE_HEIGHT,
-    width: IMAGE_WIDTH
   },
   overlay: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    borderTopWidth: 2,
-    borderTopColor: '#564CCD',
     padding: 15,
     backgroundColor: 'rgba(0,0,0,0.6)'
   },

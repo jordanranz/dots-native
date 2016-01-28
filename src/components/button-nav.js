@@ -1,4 +1,8 @@
+'use strict';
+
 import React from 'react-native';
+const Icon = require('react-native-vector-icons/FontAwesome');
+
 var {
   StyleSheet,
   PropTypes,
@@ -7,9 +11,20 @@ var {
   TouchableOpacity,
 } = React;
 
-const Icon = require('react-native-vector-icons/FontAwesome');
-
 export default class ButtonNav extends React.Component {
+  static propTypes = {
+    leftPress: React.PropTypes.func,
+    mainPress: React.PropTypes.func,
+    rightPress: React.PropTypes.func,
+    leftIcon: React.PropTypes.string,
+    mainIcon: React.PropTypes.string,
+    rightIcon: React.PropTypes.string,
+  };
+
+  static defaultProps = {
+    leftIcon: 'arrow-left',
+    rightIcon: 'arrow-right',
+  };
 
   constructor(props) {
     super(props);
@@ -18,15 +33,21 @@ export default class ButtonNav extends React.Component {
   render() {
     return (
       <View style={styles.buttonContainer}>
-        <TouchableOpacity activeOpacity={0.6} style={[styles.button, styles.secondaryButton]}>
-          <Icon name="arrow-left" size={26} color="white"/>
+        {this.props.leftPress ? 
+          <TouchableOpacity onPress={this.props.leftPress} activeOpacity={0.6} style={[styles.button, styles.secondaryButton]}>
+            <Icon name={this.props.leftIcon} size={26} color="white"/>
+          </TouchableOpacity> : null
+        }
+        
+        <TouchableOpacity onPress={this.props.mainPress} activeOpacity={0.6} style={[styles.button, styles.mainButton]}>
+          <Icon name={this.props.mainIcon} size={40} color="white"/>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.6} style={[styles.button, styles.mainButton]}>
-          <Icon name="list" size={40} color="white"/>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.6} style={[styles.button, styles.secondaryButton]}>
-          <Icon name="arrow-right" size={26} color="white"/>
-        </TouchableOpacity>
+
+        {this.props.rightPress ? 
+          <TouchableOpacity onPress={this.props.rightPress} activeOpacity={0.6} style={[styles.button, styles.secondaryButton]}>
+            <Icon name={this.props.rightIcon} size={26} color="white"/>
+          </TouchableOpacity> : null
+        }
       </View>
     );
   }

@@ -2,11 +2,12 @@
 /*eslint-disable prefer-const */
 
 import React from "react-native";
+
 import App from "../containers/app";
 import NavigationBar from "./navigation-bar";
-
 import ParallaxList from "./parallax-list";
 import DotsMap from "./dots-map";
+import ItemSlider from "./item-slider";
 
 let {
   Navigator,
